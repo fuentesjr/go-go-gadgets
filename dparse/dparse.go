@@ -17,9 +17,11 @@ func exit_if_done(err os.Error) {
 }
 
 func main() {
-  f, err := os.Open("./data.csv")
+  filename := "./data.csv"
+  f, err := os.Open(filename)
+  if err != nil { fmt.Println("Failed to open " + filename); os.Exit(1) }
   defer f.Close()
-  if err != nil { os.Exit(1) }
+
   c := csv.NewReader(f)
   layout := "01/02/2006"
 
